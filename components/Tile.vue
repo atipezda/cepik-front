@@ -1,0 +1,18 @@
+<template>
+  <br/>
+</template>
+
+<script lang='ts'>
+import {
+  Component,
+  Vue
+} from 'nuxt-property-decorator'
+
+@Component
+export default class Tile extends Vue {
+
+}
+</script>
+
+<style>
+</style>
