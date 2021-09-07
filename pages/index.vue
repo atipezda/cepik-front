@@ -1,6 +1,8 @@
 <template>
   <div class='index-page'>
-    <CEPIKFormTile/>
+    <Tile>
+      <CEPIKForm/>
+    </Tile>
   </div>
 </template>
 

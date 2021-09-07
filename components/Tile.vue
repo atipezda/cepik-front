@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :span="12" :offset="6">
+    <el-col :xs="{span:20, offset: 2}" :sm="{span:20, offset: 2}" :md='{span:12, offset: 6}'>
       <div class='tile-body'>
         <slot/>
       </div>
@@ -23,6 +23,6 @@ export default class Tile extends Vue {
 <style>
 .tile-body{
   padding: 5% 10%;
-  box-shadow: 0 0 5px black;
+  border: solid 1px black;
 }
 </style>
