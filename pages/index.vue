@@ -1,7 +1,11 @@
 <template>
   <div class='index-page'>
     <Tile>
-      <CEPIKForm/>
+      <img alt='cepik logo' src='/cepik.png'/>
+    </Tile>
+
+    <Tile>
+      <CarsForm/>
     </Tile>
   </div>
 </template>

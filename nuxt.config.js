@@ -29,7 +29,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    { src: '~/plugins/vuex-persist', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -53,5 +54,10 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
+  },
+
+  env: {
+    CAR_API_URL: "http://51.38.129.215:3000/https://api.cepik.gov.pl/pojazdy",
+    VOIVODESHIPS_DICT_API_URL: "http://51.38.129.215:3000/https://api.cepik.gov.pl/slowniki/wojewodztwa"
   }
 }

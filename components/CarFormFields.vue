@@ -5,9 +5,9 @@
         <el-select v-model='voivodeship' name='voivodeship' :loading='voivodeshipsLoading'>
           <el-option
             v-for='voivodeship in voivodeships'
-            :key='voivodeship'
-            :label='voivodeship'
-            :value='voivodeship' />
+            :key='voivodeship["klucz-slownika"]'
+            :label='voivodeship["wartosc-slownika"]'
+            :value='voivodeship["klucz-slownika"]' />
         </el-select>
       </el-col>
     </el-form-item>
@@ -42,10 +42,10 @@
 
 <script lang='ts'>
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ApiParams, FIRST_REGISTER_DATE_TYPE, LAST_REGISTER_DATE_TYPE } from '~/types/api'
+import { CarApiParams, FIRST_REGISTER_DATE_TYPE, LAST_REGISTER_DATE_TYPE, VoivodeshipsDictRecord } from '~/types/api'
 
 @Component
-export default class CEPIKFormFields extends Vue {
+export default class CarFormFields extends Vue {
 
   get dateFilterTypes(): string[] {
     return [{
@@ -60,40 +60,40 @@ export default class CEPIKFormFields extends Vue {
   }
 
   get dataRange(): string[] {
-    const { dateFrom, dateTo } = this.$store.state.filters
+    const { dateFrom, dateTo } = this.$store.state.cars
     return [dateFrom, dateTo]
   }
 
-  set dataRange(dataRange: string[]): void {
-    this.$store.commit('filters/updateDateRange', dataRange)
+  set dataRange(dataRange: string[]){
+    this.$store.commit('cars/updateDateRange', dataRange)
   }
 
   get voivodeship(): string {
-    return this.$store.state.filters.voivodeship
+    return this.$store.state.cars.voivodeship
   }
 
-  set voivodeship(name: string): void {
-    this.$store.commit('filters/updateVoivodeship', name)
+  set voivodeship(name: string){
+    this.$store.commit('cars/updateVoivodeship', name)
   }
 
-  get voivodeships(): string {
-    return this.$store.state.voivodeships.names
+  get voivodeships(): VoivodeshipsDictRecord {
+     return  this.$store.state.voivodeships.dict
   }
 
   get voivodeshipsLoading(): boolean {
     return this.$store.state.voivodeships.loading
   }
 
-  get dateType(): ApiParams['dateType'] {
-    return this.$store.state.filters.dateType
+  get dateType(): CarApiParams['dateType'] {
+    return this.$store.state.cars.dateType
   }
 
-  set dateType(type: ApiParams['dateType']): void {
-    this.$store.commit('filters/updateDateType', type)
+  set dateType(type: CarApiParams['dateType']): void {
+    this.$store.commit('cars/updateDateType', type)
   }
 
   mounted() {
-    this.$store.commit('voivodeships/INIT')
+    this.$store.dispatch('voivodeships/INIT')
   }
 
 }

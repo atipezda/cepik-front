@@ -1,6 +1,6 @@
 <template>
     <el-form ref='form' :model='formData' :rules='rules'>
-      <CEPIKFormFields />
+      <CarFormFields/>
 
       <el-form-item>
         <el-button type='primary' @click='validateForm'>Search</el-button>
@@ -11,23 +11,23 @@
 <script lang='ts'>
 import { Component, Vue, Ref } from 'nuxt-property-decorator'
 import { ElForm } from 'element-ui/types/form'
-import { ApiParams } from '~/types/api'
+import { CarApiParams } from '~/types/api'
 import { validateDataRange } from '~/helpers/validationHelper'
 
 interface CEPIKFormData {
-  voivodeship: ApiParams['voivodeship']
+  voivodeship: CarApiParams['voivodeship']
   dateRange: string[]
-  dateType: ApiParams['dateType']
+  dateType: CarApiParams['dateType']
 }
 
 
 @Component
-export default class CEPIKForm extends Vue {
+export default class CarsForm extends Vue {
 
   @Ref form: ElForm
 
   get formData(): CEPIKFormData {
-    const { voivodeship, dateFrom, dateTo, dateType } = this.$store.state.filters
+    const { voivodeship, dateFrom, dateTo, dateType } = this.$store.state.cars
     const dateRange = [dateFrom, dateTo]
 
     return {
@@ -46,6 +46,7 @@ export default class CEPIKForm extends Vue {
 
   validateForm(): void {
     this.$refs.form.validate()
+    this.$store.dispatch('cars/SUBMIT_FORM')
   }
 
 }
