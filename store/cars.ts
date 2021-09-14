@@ -1,6 +1,7 @@
 import { Commit } from 'vuex'
 import axios from 'axios'
 import { LAST_REGISTER_DATE_TYPE, FIRST_REGISTER_DATE_TYPE } from '~/types/api'
+import { formatDateISOWTD } from '~/helpers/dateHelper'
 
 interface CarsState {
   voivodeship: string,
@@ -36,11 +37,15 @@ export const mutations = {
 export const actions = {
   async SUBMIT_FORM({ commit, state }: { commit: Commit, state: CarsState }) {
     try {
-      const response = await axios.get('/api/' + process.env.CEPIK_API_PATH, {
+
+      const dateFrom = new Date(state.dateFrom)
+      const dateTo = new Date(state.dateTo)
+
+      const response = await axios.get(  process.env.CAR_API_URL !, {
         params: {
           'wojewodztwo': state.voivodeship,
-          'data-od': state.dateFrom,
-          'data-do': state.dateTo,
+          'data-od': formatDateISOWTD(dateFrom),
+          'data-do': formatDateISOWTD(dateTo),
           'typ-daty': state.dateType
         }
       })

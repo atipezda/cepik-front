@@ -4,3 +4,7 @@ export function isDateToday(date: Date) {
     date.getMonth() === today.getMonth() &&
     date.getFullYear() === today.getFullYear()
 }
+
+export function formatDateISOWTD(date: Date){
+  return date.toISOString().split('T')[0].replaceAll('-','')
+}
