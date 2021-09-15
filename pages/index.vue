@@ -1,16 +1,21 @@
 <template>
   <div class='index-page'>
     <Tile>
-      <img alt='cepik logo' src='/cepik.png'/>
+      <img alt='cepik logo' src='/cepik.png' />
     </Tile>
 
     <Tile>
-      <CarsForm/>
+      <DarkThemeSwitch />
     </Tile>
+
+    <Tile>
+      <CarsForm />
+    </Tile>
+    <DarkThemeProvider v-if='darkMode' />
   </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import {
   Component,
   Vue
@@ -18,10 +23,13 @@ import {
 
 @Component
 export default class Index extends Vue {
+  get darkMode(): boolean{
+    return this.$store.state.settings.darkMode
+  }
 }
 </script>
 <style>
-.index-page{
+.index-page {
   height: 100vh;
   width: 100vw;
   display: flex;
