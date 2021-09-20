@@ -10,11 +10,11 @@ export default class DarkThemeProvider extends Vue {
 
   mounted() {
     // import('element-theme-dark')
-    $nuxt.$colorMode.preference = 'dark'
+    this.$nuxt.$colorMode.preference = 'dark'
   }
 
   beforeDestroy() {
-    $nuxt.$colorMode.preference = 'light'
+    this.$nuxt.$colorMode.preference = 'light'
   }
 
 }

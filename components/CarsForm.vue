@@ -17,9 +17,9 @@ import { CarApiParams } from '~/types/api'
 import { validateDataRange } from '~/helpers/validationHelper'
 
 interface CEPIKFormData {
-  voivodeship: CarApiParams['voivodeship']
+  voivodeship: CarApiParams['wojewodztwo']
   dateRange: string[]
-  dateType: CarApiParams['dateType']
+  dateType: CarApiParams['typ-daty']
 }
 
 
@@ -47,7 +47,7 @@ export default class CarsForm extends Vue {
     dateType: { required: true, message: 'Please select type of registration date', trigger: 'blur' }
   }
 
-  private async _submitForm(): void {
+  private async _submitForm(): Promise<void> {
     const formModel: any = this.$refs.form
     formModel.validate()
     await this.$store.dispatch('cars/SUBMIT_FORM')
