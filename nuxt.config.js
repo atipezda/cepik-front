@@ -66,5 +66,10 @@ export default {
     env: {
     CAR_API_URL: 'http://51.38.129.215:3000/https://api.cepik.gov.pl/pojazdy',
     VOIVODESHIPS_DICT_API_URL: 'http://51.38.129.215:3000/https://api.cepik.gov.pl/slowniki/wojewodztwa'
+  },
+  server:{
+    port: process.env.PORT || 3000,
+    host: '0.0.0.0', // default: localhost,
+    timing: false
   }
 }
