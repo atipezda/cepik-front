@@ -16,6 +16,3 @@ export default class DarkThemeProvider extends Vue {
 
 }
 </script>
-
-<style scoped>
-</style>

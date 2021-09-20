@@ -42,12 +42,14 @@
 
 <script lang='ts'>
 import { Component, Vue } from 'nuxt-property-decorator'
+import { Notification } from 'element-ui'
 import { CarApiParams, FIRST_REGISTER_DATE_TYPE, LAST_REGISTER_DATE_TYPE, VoivodeshipsDictRecord } from '~/types/api'
+import { datesInDayRange } from '~/helpers/dateHelper'
 
 @Component
 export default class CarFormFields extends Vue {
 
-  get dateFilterTypes(): string[] {
+  get dateFilterTypes(): any[] {
     return [{
       name: 'first registration date',
       value: FIRST_REGISTER_DATE_TYPE
@@ -64,7 +66,16 @@ export default class CarFormFields extends Vue {
     return [dateFrom, dateTo]
   }
 
-  set dataRange(dataRange: string[]){
+  set dataRange(dataRange: string[]) {
+    const startDate = new Date(dataRange[0])
+    const endDate = new Date(dataRange[1])
+    const isInTwoYearsRange = datesInDayRange(startDate, endDate, 365 * 2)
+
+    if (!isInTwoYearsRange) {
+      Notification.error('Registration dates should be in 2 years range')
+      return
+    }
+
     this.$store.commit('cars/updateDateRange', dataRange)
   }
 
@@ -72,23 +83,23 @@ export default class CarFormFields extends Vue {
     return this.$store.state.cars.voivodeship
   }
 
-  set voivodeship(name: string){
+  set voivodeship(name: string) {
     this.$store.commit('cars/updateVoivodeship', name)
   }
 
   get voivodeships(): VoivodeshipsDictRecord {
-     return  this.$store.state.voivodeships.dict
+    return this.$store.state.voivodeships.dict
   }
 
   get voivodeshipsLoading(): boolean {
     return this.$store.state.voivodeships.loading
   }
 
-  get dateType(): CarApiParams['dateType'] {
+  get dateType(): CarApiParams['typ-daty'] {
     return this.$store.state.cars.dateType
   }
 
-  set dateType(type: CarApiParams['dateType']): void {
+  set dateType(type: CarApiParams['typ-daty']) {
     this.$store.commit('cars/updateDateType', type)
   }
 

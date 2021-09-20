@@ -23,15 +23,18 @@ export const mutations = {
     state.loading = false
     state.loadDate = new Date()
     state.dict = voivodeships
+  },
+  CLEAR_ALL_VOIVODESHIPS(state: VoivodeshipsState) {
+    state.dict = []
   }
 }
 
 
 export const actions = {
-  async INIT({ commit, state }: { commit: Commit, state: VoivodeshipsState }) {
+  async INIT({ commit, state }: { commit: Commit, state: VoivodeshipsState }, usingCache: boolean = true) {
 
-    if (state.loadDate && isDateToday(new Date(state.loadDate))) return // loaded from cache and data is actual (today)
-    console.log("FETCH VOIVODESHIPS")
+    if (usingCache && state.loadDate && isDateToday(new Date(state.loadDate))) return // loaded from cache and data is actual (today)
+
     try {
       const res: AxiosResponse = await axios.get(process.env.VOIVODESHIPS_DICT_API_URL !)
       const voivodeships: VoivodeshipsDictRecord[] = res.data.data.attributes['dostepne-rekordy-slownika']

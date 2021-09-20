@@ -11,9 +11,10 @@
 <script lang='ts'>
 import { Component, Vue, Ref } from 'nuxt-property-decorator'
 import { ElForm } from 'element-ui/types/form'
-import { debounce } from 'ts-debounce';
+import { debounce } from 'ts-debounce'
 import { CarApiParams } from '~/types/api'
 import { validateDataRange } from '~/helpers/validationHelper'
+import { Notification } from 'element-ui'
 
 interface CEPIKFormData {
   voivodeship: CarApiParams['voivodeship']
@@ -25,7 +26,7 @@ interface CEPIKFormData {
 @Component
 export default class CarsForm extends Vue {
 
-  @Ref form: ElForm
+  @Ref() form!: ElForm
 
   debounceSubmit: Function = debounce(this._submitForm, 300)
 
@@ -40,16 +41,22 @@ export default class CarsForm extends Vue {
     }
   }
 
-  rules = {
+  protected rules = {
     voivodeship: { required: true, message: 'Please select voivodeship', trigger: 'blur' },
     dateRange: { required: true, validator: validateDataRange, trigger: 'change' },
     dateType: { required: true, message: 'Please select type of registration date', trigger: 'blur' }
-
   }
 
-  protected _submitForm(): void {
-    this.$refs.form.validate()
-    this.$store.dispatch('cars/SUBMIT_FORM')
+  private async _submitForm(): void {
+    const formModel: any = this.$refs.form
+    formModel.validate()
+    await this.$store.dispatch('cars/SUBMIT_FORM')
+    if(this.$store.state.cars.resultLoadedFromCache){
+      Notification.info({
+        title: 'Loaded from cache',
+        message: 'Use clear cache button to update'
+      })
+    }
   }
 
 }

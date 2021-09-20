@@ -1,6 +1,7 @@
 <template>
   <el-switch
     v-model="darkMode"
+    class='theme-switch'
     inactive-text="Light mode"
     active-text="Dark mode">
   </el-switch>
