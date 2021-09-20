@@ -57,6 +57,9 @@ export default {
   build: {
     transpile: [/^element-ui/]
   },
+  generate: {
+    dir: 'public'
+  },
   colorMode: {
     preference: 'light'
   },
