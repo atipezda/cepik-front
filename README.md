@@ -1,7 +1,11 @@
 # cepik_front
 
-Built on `nuxt` with `typescript` using `vue`
+#DEMO
+http://cepik-front.herokuapp.com
+
 ## Build Setup
+
+Built on `nuxt` with `typescript` using `vue`
 
 ```bash
 # install dependencies
