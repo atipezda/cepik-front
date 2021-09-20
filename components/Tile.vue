@@ -56,8 +56,8 @@ export default class Tile extends Vue {
       offset: 1
     }
     return {
-      span: 12,
-      offset: 6
+      span: 16,
+      offset: 4
     }
   }
 
@@ -70,10 +70,9 @@ export default class Tile extends Vue {
   padding: 5% 10%;
   margin: 10px 0;
   border-radius: 5px;
-  /*border: solid 1px black;*/
   box-shadow: 0 0 10px rgb(0 0 0 / 0.2);
 }
 .tile-body.full{
-  padding: 2% 0;
+  padding: 2% 5px;
 }
 </style>

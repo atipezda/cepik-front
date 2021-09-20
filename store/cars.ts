@@ -1,5 +1,4 @@
 import { Commit } from 'vuex'
-import axios from 'axios'
 import {
   LAST_REGISTER_DATE_TYPE,
   FIRST_REGISTER_DATE_TYPE,
@@ -8,6 +7,7 @@ import {
 } from '~/types/api'
 import { formatDateISOWTD } from '~/helpers/dateHelper'
 import { findCarResultinAllResults } from '~/helpers/cacheHelper'
+import { $axios } from '~/utils/api'
 
 export interface ResultStored {
   voivodeship: string,
@@ -42,6 +42,10 @@ export const stateObject: CarsState = {
 export const state: Function = () => (stateObject)
 
 export const mutations = {
+  INIT(state: CarsState){
+    state.isLoading = false;
+    state.result = []
+  },
   updateVoivodeship(state: CarsState, name: CarsState['voivodeship']) {
     state.voivodeship = name
   },
@@ -101,18 +105,19 @@ export const actions = {
       if (rows) {
         commit('SET_LOADED_FROM_CACHE')
       }else{
-        const response = await axios.get(process.env.CAR_API_URL !, {
+        commit('SET_LOADED_FROM_CACHE', false)
+        const response = await $axios.get( process.env.CAR_API_URL !, {
           params
         })
         rows = response.data.data.map((result: any) => result.attributes)
-        commit('SET_LOADED_FROM_CACHE', false)
       }
 
 
       commit('UPDATE_RESULTS', { params, rows })
       commit('SET_LOADING_STATE', false)
     } catch (error) {
-      console.log(error)
+      commit('SET_LOADING_STATE', false)
+      console.error(error)
     }
   }
 }

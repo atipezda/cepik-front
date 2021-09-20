@@ -28,5 +28,6 @@ export default class AppSettings extends Vue {
 .app-settings-container /deep/.clear-cache-button{
   justify-self: flex-end;
   margin-left: auto;
+  margin-top: 5px;
 }
 </style>

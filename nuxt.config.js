@@ -31,6 +31,7 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     { src: '~/plugins/vuex-persist', ssr: false },
+    '~/plugins/axios-accessor'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -40,12 +41,13 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/color-mode'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -53,11 +55,13 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/^element-ui/],
+    transpile: [/^element-ui/]
   },
-
-  env: {
-    CAR_API_URL: "http://51.38.129.215:3000/https://api.cepik.gov.pl/pojazdy",
-    VOIVODESHIPS_DICT_API_URL: "http://51.38.129.215:3000/https://api.cepik.gov.pl/slowniki/wojewodztwa"
+  colorMode: {
+    preference: 'light'
+  },
+    env: {
+    CAR_API_URL: 'http://51.38.129.215:3000/https://api.cepik.gov.pl/pojazdy',
+    VOIVODESHIPS_DICT_API_URL: 'http://51.38.129.215:3000/https://api.cepik.gov.pl/slowniki/wojewodztwa'
   }
 }

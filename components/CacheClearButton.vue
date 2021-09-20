@@ -13,7 +13,7 @@ export default class CacheClearButton extends Vue {
     this.$store.commit('cars/CLEAR_ALL_RESULTS')
     this.$store.commit('voivodeships/CLEAR_ALL_VOIVODESHIPS')
     this.$store.dispatch('voivodeships/INIT', false)
-    Notification.success('Cache cleared')
+    Notification.success({title: 'Cache cleared'})
   }
 
 }

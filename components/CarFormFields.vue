@@ -13,9 +13,10 @@
     </el-form-item>
 
     <el-form-item label='Registration date' prop='dateRange'>
-      <el-col>
+      <el-col :md='{span: 20}' :lg='{span: 12}' >
         <el-date-picker
           v-model='dataRange'
+          class='car-date-range-picker'
           type='daterange'
           name='dateRange'
           range-separator='To'
@@ -109,3 +110,8 @@ export default class CarFormFields extends Vue {
 
 }
 </script>
+<style>
+.car-date-range-picker {
+  width: 100% !important;
+}
+</style>

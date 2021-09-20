@@ -1,7 +1,7 @@
 <template>
   <div class='index-page'>
     <Tile>
-      <img alt='cepik logo' src='/cepik.png' />
+      <img alt='cepik logo' class='cepik-logo' src='/cepik.png' />
       <AppSettings/>
     </Tile>
 
@@ -28,6 +28,11 @@ export default class Index extends Vue {
   get darkMode(): boolean {
     return this.$store.state.settings.darkMode
   }
+
+  mounted(){
+    this.$store.commit('cars/INIT')
+  }
+
 }
 </script>
 <style scoped>
@@ -38,6 +43,9 @@ export default class Index extends Vue {
   flex-direction: column;
 }
 /deep/.app-settings-container{
+  width: 100%;
+}
+.cepik-logo{
   width: 100%;
 }
 </style>

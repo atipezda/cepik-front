@@ -1,6 +1,5 @@
 import { Commit } from 'vuex'
 import axios, { AxiosResponse } from 'axios'
-import VuexPersistence from 'vuex-persist'
 import { VoivodeshipsDictRecord } from '~/types/api'
 import { isDateToday } from '~/helpers/dateHelper'
 
@@ -40,7 +39,7 @@ export const actions = {
       const voivodeships: VoivodeshipsDictRecord[] = res.data.data.attributes['dostepne-rekordy-slownika']
       commit('SET_VOIVODESHIPS', voivodeships)
     } catch (error) {
-      console.error(error)
+      state.loading = false
     }
   }
 }
